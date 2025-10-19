@@ -1,6 +1,8 @@
 package com.deveyk.mvcdemo.entity;
 
+import com.deveyk.mvcdemo.validation.ValidEmail;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name="employee")
@@ -13,12 +15,19 @@ public class Employee {
     private int id;
 
     @Column(name="first_name")
+    @NotBlank(message = "First name is required")
+    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
     private String firstName;
 
     @Column(name="last_name")
+    @NotBlank(message = "Last name is required")
+    @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
     private String lastName;
 
     @Column(name="email")
+    @NotBlank(message = "Email is required")
+    @ValidEmail
+    @Size(max = 100, message = "Email must not exceed 100 characters")
     private String email;
 
 
